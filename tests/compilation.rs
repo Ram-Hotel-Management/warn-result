@@ -13,6 +13,6 @@ fn _test_compilation2() -> Result<WOK<(), &'static str>, String> {
         warn_result::WarnResult::Warning("This is another warning");
     let res = warn_result::warn_try_sc_error_result!(warning);
 
-    let _: () = res.unwrap_or_default();
-    Ok(res)
+    let a = res?;
+    Ok(a)
 }
