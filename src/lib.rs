@@ -260,6 +260,19 @@ macro_rules! warn_try_sc_error {
     };
 }
 
+/// same as 'warn_try_sc_error'
+/// but return Result<_,_>
+#[macro_export]
+macro_rules! warn_try_sc_error_result {
+    ($expr:expr) => {
+        match $expr {
+            $crate::WarnResult::Ok(val) => $crate::WOK::Ok(val),
+            $crate::WarnResult::Warning(warn) => $crate::WOK::Warning(warn),
+            $crate::WarnResult::Err(err) => return Err(err),
+        }
+    };
+}
+
 // Nightly compatibility using the Try trait
 #[cfg(feature = "nightly")]
 impl<T, W, E> std::ops::Try for WarnResult<T, W, E> {
