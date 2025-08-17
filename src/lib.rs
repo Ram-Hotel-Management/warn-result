@@ -266,9 +266,9 @@ macro_rules! warn_try_sc_error {
 macro_rules! warn_try_sc_error_result {
     ($expr:expr) => {
         match $expr {
-            $crate::WarnResult::Ok(val) => $crate::WOK::Ok(val),
-            $crate::WarnResult::Warning(warn) => $crate::WOK::Warning(warn),
-            $crate::WarnResult::Err(err) => return Err(err),
+            $crate::WarnResult::Ok(val) => Ok($crate::WOK::Ok(val)),
+            $crate::WarnResult::Warning(warn) => Ok($crate::WOK::Warning(warn)),
+            $crate::WarnResult::Err(err) => Err(err),
         }
     };
 }
